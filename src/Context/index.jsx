@@ -15,6 +15,8 @@ export function AppContextProvider({ children }) {
   const [selectedProduct, setSelectedProduct] = useState({});
   const [lastOrder, setLasOrder] = useState(null);
   const [orders, setOrders] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   const openDetail = product => {
     closeCart();
@@ -76,6 +78,11 @@ export function AppContextProvider({ children }) {
     setCartCount(cart.length);
   }, [cart])
 
+  useEffect(() => {
+    setFilteredProducts(products.filter(product => product.title.toLowerCase().includes(searchValue.toLowerCase())));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchValue])
+
 
   return (
     <AppContext.Provider value={{
@@ -97,6 +104,9 @@ export function AppContextProvider({ children }) {
       orders,
       lastOrder,
       findOrder,
+      searchValue, 
+      setSearchValue,
+      filteredProducts,
     }}>
       {children}
     </AppContext.Provider>

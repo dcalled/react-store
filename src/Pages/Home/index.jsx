@@ -3,15 +3,25 @@ import { Card } from '../../Components/Card';
 import { Layout } from '../../Components/Layout';
 import { AppContext } from '../../Context';
 import { ProductDetail } from '../../Components/ProductDetail';
+import { PageTitle } from '../../Components/PageTitle';
 
 export function Home() {
 
-    const { products, addToCart, openDetail, isProductInCart, removeFromCart } = useContext(AppContext);
+    const { filteredProducts, addToCart, openDetail, isProductInCart, removeFromCart, setSearchValue, searchValue } = useContext(AppContext);
 
     return (
         <Layout>
+            <PageTitle title='Products'vertical={true}>
+                <input 
+                    type='text' 
+                    placeholder='Search products'
+                    className='p-2 border border-black rounded-lg my-4'
+                    onChange={event => setSearchValue(event.target.value)}
+                    value={searchValue}
+                />
+            </PageTitle>
             <section className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
-                {products.map(item => 
+                {filteredProducts.map(item => 
                     <Card key={item.id}
                     title={item.title}
                     price={item.price}

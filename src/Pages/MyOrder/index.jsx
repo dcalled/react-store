@@ -5,6 +5,7 @@ import { CartCard } from '../../Components/CartCard';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/solid';
 import { RoutePaths } from '../../Utils';
+import { PageTitle } from '../../Components/PageTitle';
 
 export function MyOrder() {
   const { orderId } = useParams();
@@ -13,13 +14,12 @@ export function MyOrder() {
 
   return (
     <Layout>
-      <div className='flex justify-center items-center relative w-96 mb-4'>
+      <PageTitle title='My Order'>
         <Link to={RoutePaths.MyOrders} className='absolute left-6'>
           <ArrowLeftOnRectangleIcon className='w-10 h-10 text-black'/>
         </Link>
-        <h1>My Order</h1>
-      </div>
-      <div className='flex flex-col w-96'>
+      </PageTitle>
+      <div className='flex flex-col w-80'>
         {order ? order.products.map(
           product => <CartCard
             key={product.id}
