@@ -2,10 +2,13 @@
 import { createContext, useEffect, useState } from 'react';
 import { useProductsApi } from '../Api';
 import { v4 as UUID } from 'uuid';
+import { pipe } from '../Utils';
 
 export const AppContext = createContext();
 
 export function AppContextProvider({ children }) {
+
+  const { products } = useProductsApi();
 
   const [cart, setCart] = useState([]);
   const [cartCount, setCartCount] = useState(0);
@@ -17,6 +20,7 @@ export function AppContextProvider({ children }) {
   const [orders, setOrders] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [categoryFilter, setCategoryFilter] = useState('');
 
   const openDetail = product => {
     closeCart();
@@ -37,8 +41,6 @@ export function AppContextProvider({ children }) {
   const closeCart = () => {
     setIsCartOpen(false);
   }
-
-  const { products } = useProductsApi();
 
   const isProductInCart = product => 
     cart.findIndex(item => item.id === product.id) >= 0;
@@ -69,6 +71,17 @@ export function AppContextProvider({ children }) {
   const findOrder = orderId => 
     orders.find(item => item.id === orderId);
   
+  const applySearchFilter = items => items.filter(item => 
+    item.category.name.toLowerCase().includes(categoryFilter.toLowerCase())
+  );
+
+  const applyCategoryFilter = items => items.filter(item => 
+    item.title.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
+  const allFilters = pipe(applyCategoryFilter, applySearchFilter);
+
+  const setAllCategory = () => setCategoryFilter('');
 
   useEffect(() => {
     setCartPrice(cart.reduce((prev, item) => prev + item.price, 0));
@@ -79,9 +92,10 @@ export function AppContextProvider({ children }) {
   }, [cart])
 
   useEffect(() => {
-    setFilteredProducts(products.filter(product => product.title.toLowerCase().includes(searchValue.toLowerCase())));
+    setFilteredProducts(allFilters(products));
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchValue])
+  }, [searchValue, products, categoryFilter])
+
 
 
   return (
@@ -107,6 +121,8 @@ export function AppContextProvider({ children }) {
       searchValue, 
       setSearchValue,
       filteredProducts,
+      setAllCategory,
+      setCategoryFilter,
     }}>
       {children}
     </AppContext.Provider>

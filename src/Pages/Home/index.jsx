@@ -4,10 +4,14 @@ import { Layout } from '../../Components/Layout';
 import { AppContext } from '../../Context';
 import { ProductDetail } from '../../Components/ProductDetail';
 import { PageTitle } from '../../Components/PageTitle';
+import { useParams } from 'react-router-dom';
 
 export function Home() {
 
-    const { filteredProducts, addToCart, openDetail, isProductInCart, removeFromCart, setSearchValue, searchValue } = useContext(AppContext);
+    const { filteredProducts, addToCart, openDetail, isProductInCart, removeFromCart, setSearchValue, searchValue, setCategoryFilter } = useContext(AppContext);
+
+    const { category } = useParams();
+    setCategoryFilter(category || '');
 
     return (
         <Layout>

@@ -12,6 +12,8 @@ import { AppContextProvider } from '../../Context';
 const AppRoutes = () => 
   useRoutes([
     { path: RoutePaths.Home, element: <Home /> },
+    { path: RoutePaths.All, element: <Home /> },
+    { path: RoutePaths.Categories, element: <Home /> },
     { path: RoutePaths.MyAccount, element: <MyAccount /> },
     { path: RoutePaths.MyOrder, element: <MyOrder /> },
     { path: RoutePaths.MyOrders, element: <MyOrders /> },
