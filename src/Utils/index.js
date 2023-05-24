@@ -1,17 +1,19 @@
+const base = '/react-store';
+
 export const RoutePaths = {
-  'Home': '/',
-  'MyAccount': '/my-account',
-  'MyOrder': '/my-orders/:orderId',
-  'MyOrders': '/my-orders',
-  'SignIn': '/sign-in',
-  'NotFound': '/*',
-  'Electronics': '/category/electronics',
-  'Clothes': '/category/clothes',
-  'Toys': '/category/toys',
-  'Furniture': '/category/furniture',
-  'Others': '/category/others',
-  'All': '/all',
-  'Categories': '/category/:category'
+  'Home': base + '/',
+  'MyAccount': base + '/my-account',
+  'MyOrder': base + '/my-orders/:orderId',
+  'MyOrders': base + '/my-orders',
+  'SignIn': base + '/sign-in',
+  'NotFound': base + '/*',
+  'Electronics': base + '/category/electronics',
+  'Clothes': base + '/category/clothes',
+  'Toys': base + '/category/toys',
+  'Furniture': base + '/category/furniture',
+  'Others': base + '/category/others',
+  'All': base + '/all',
+  'Categories': base + '/category/:category'
 };
 
 export const apiUrl = lib => `https://api.escuelajs.co/api/v1/${lib}`;

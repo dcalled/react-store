@@ -24,6 +24,7 @@ export function Home() {
                     value={searchValue}
                 />
             </PageTitle>
+            {filteredProducts.length > 0 ? 
             <section className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
                 {filteredProducts.map(item => 
                     <Card key={item.id}
@@ -36,7 +37,8 @@ export function Home() {
                     isInCart={isProductInCart(item)}
                     onDelete={() => removeFromCart(item)}
                 />)}
-            </section>
+            </section> :
+            <p>Nothing found 😔</p>}
             <ProductDetail />
         </Layout>
     );

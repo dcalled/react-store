@@ -77,7 +77,7 @@ export function Navbar() {
             to={RoutePaths.MyOrders}
             className={({ isActive }) => isActive ? 'underline': ''}
           >
-            MyOrders
+            My Orders
           </NavLink>
         </li>
         <li>
@@ -85,7 +85,7 @@ export function Navbar() {
             to={RoutePaths.MyAccount}
             className={({ isActive }) => isActive ? 'underline': ''}
           >
-            MyAccount
+            My Account
           </NavLink>
         </li>
         <li>
@@ -93,7 +93,7 @@ export function Navbar() {
             to={RoutePaths.SignIn}
             className={({ isActive }) => isActive ? 'underline': ''}
           >
-            SignIn
+            Sign In
           </NavLink>
         </li>
         <li 
